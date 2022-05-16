@@ -40,16 +40,21 @@ namespace tictactoe
             Console.WriteLine("----------");
             Thread.Sleep(1000);
 
-
             Console.WriteLine("Player 1, you are X. Go first");
 
             while (gameState.Equals("running"))
             {
-                if (turn == 1)
+                checkVictoryP1();
+                checkVictoryP2();
+                if (turn == 1 && gameState.Equals("running"))
                 {
                     Console.WriteLine("Player 1. Which box would you like to go?");
                     chosenPositionString = Console.ReadLine();
+                    try {
                     chosenPosition = Int32.Parse(chosenPositionString);
+                    } catch (FormatException){
+                        Console.WriteLine("Error: The input is not a valid number.");
+                    }
                     Console.WriteLine(chosenPosition);
                     // Ok some annoying if statements here we go....
                     if (chosenPosition == 1)
@@ -209,7 +214,7 @@ namespace tictactoe
 
                 // Yay player 2
 
-                if (turn == 2)
+                if (turn == 2 && gameState.Equals("running"))
                 {
                     Console.WriteLine("Player 2. Which box would you like to go?");
                     chosenPositionString = Console.ReadLine();
@@ -371,21 +376,65 @@ namespace tictactoe
                     }
                 }
 
-
                 // If statements are done!
 
+                // Check if player 1 won
+                void checkVictoryP1(){
+                    if (topLeft.value == 1 && topRight.value == 1 && topMiddle.value == 1){
+                        gameState = "p1";
+                    }
+                    if (middleLeft.value == 1 && middleMiddle.value == 1 && middleRight.value == 1){
+                        gameState = "p1";
+                    }
+                    if (bottomLeft.value == 1 && bottomMiddle.value == 1 && bottomRight.value == 1)
+                    {
+                        gameState = "p1";
+                    }
+                    if (topLeft.value == 1 && middleLeft.value == 1 && bottomLeft.value == 1){
+                        gameState = "p1";
+                    }
+                    if (topMiddle.value == 1 && middleMiddle.value == 1 && bottomMiddle.value ==1){
+                        gameState = "p1";
+                    }
+                    if (topLeft.value == 1 && middleLeft.value == 1 && bottomLeft.value == 1){
+                        gameState = "p1";
+                    }
+                    if (topLeft.value == 1 && middleMiddle.value == 1 && bottomRight.value == 1){
+                        gameState = "p1";
+                    }
+                    if (topRight.value == 1 && middleMiddle.value == 1 && bottomLeft.value == 1){
+                        gameState = "p1";
+                    }
+                }
+                // Check if player 2 won
+                 void checkVictoryP2(){
+                    if (topLeft.value == 2 && topRight.value == 2 && topMiddle.value == 2){
+                        gameState = "p2";
+                    }
+                    if (middleLeft.value == 2 && middleMiddle.value == 2 && middleRight.value == 2){
+                        gameState = "p2";
+                    }
+                    if (bottomLeft.value == 2 && bottomMiddle.value == 2 && bottomRight.value == 2)
+                    {
+                        gameState = "p2";
+                    }
+                    if (topLeft.value == 2 && middleLeft.value == 2 && bottomLeft.value == 2){
+                        gameState = "p2";
+                    }
+                    if (topMiddle.value == 2 && middleMiddle.value == 2 && bottomMiddle.value == 2){
+                        gameState = "p2";
+                    }
+                    if (topLeft.value == 2 && middleLeft.value == 2 && bottomLeft.value == 2){
+                        gameState = "p2";
+                    }
+                    if (topLeft.value == 2 && middleMiddle.value == 2 && bottomRight.value == 2){
+                        gameState = "p2";
+                    }
+                    if (topRight.value == 2 && middleMiddle.value == 2 && bottomLeft.value == 2){
+                        gameState = "p2";
+                    }
+                }
 
-                // Make sure numbers are correctly formatted
-
-
-
-
-
-
-
-
-
-                
                 void displayGrid()
                 {
                     topLeft.convertLetter();
@@ -407,9 +456,17 @@ namespace tictactoe
                     Console.WriteLine("----------");
                     Console.WriteLine();
                 }
-                Console.WriteLine("Nothing for me to do.");
-                Thread.Sleep(1000);
 
+            }
+            while (gameState.Equals("p1"))
+            {
+                Console.WriteLine("Player 1 wins!");
+                gameState = ("");
+            }
+            while (gameState.Equals("p2"))
+            {
+                Console.WriteLine("Player 2 wins!");
+                gameState = ("");
             }
             Console.WriteLine("Press any key to close...");
             Console.ReadKey();
