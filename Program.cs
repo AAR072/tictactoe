@@ -14,6 +14,7 @@ namespace tictactoe
         public static string chosenPositionString;
         public static int chosenPosition;
         public static int turn = 1;
+        public static int turnCounter = 0;
         static void Main(string[] args)
         {
             //  Initialize grid classes
@@ -43,9 +44,12 @@ namespace tictactoe
             Console.WriteLine("Player 1, you are X. Go first");
 
             while (gameState.Equals("running"))
-            {
+            {   
                 checkVictoryP1();
                 checkVictoryP2();
+                if (turnCounter == 9){
+                    gameState = "tie";
+                }
                 if (turn == 1 && gameState.Equals("running"))
                 {
                     Console.WriteLine("Player 1. Which box would you like to go?");
@@ -65,6 +69,7 @@ namespace tictactoe
                             topLeft.occupied = true;
                             turn = 2;
                             displayGrid();
+                            turnCounter++;
                             continue;
                         }
                         else if (topLeft.occupied)
@@ -82,6 +87,7 @@ namespace tictactoe
                             topMiddle.occupied = true;
                             turn = 2;
                             displayGrid();
+                            turnCounter++;
                             continue;
                         }
                         else if (topMiddle.occupied)
@@ -98,6 +104,7 @@ namespace tictactoe
                             topRight.value = 1;
                             topRight.occupied = true;
                             turn = 2;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -115,6 +122,7 @@ namespace tictactoe
                             middleLeft.value = 1;
                             middleLeft.occupied = true;
                             turn = 2;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -132,6 +140,7 @@ namespace tictactoe
                             middleMiddle.value = 1;
                             middleMiddle.occupied = true;
                             turn = 2;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -149,6 +158,7 @@ namespace tictactoe
                             middleRight.value = 1;
                             middleRight.occupied = true;
                             turn = 2;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -166,6 +176,7 @@ namespace tictactoe
                             bottomLeft.value = 1;
                             bottomLeft.occupied = true;
                             turn = 2;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -183,6 +194,7 @@ namespace tictactoe
                             bottomMiddle.value = 1;
                             bottomMiddle.occupied = true;
                             turn = 2;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -200,6 +212,7 @@ namespace tictactoe
                             bottomRight.value = 1;
                             bottomRight.occupied = true;
                             turn = 2;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -210,10 +223,18 @@ namespace tictactoe
                             continue;
                         }
                     }
+                    if (chosenPosition > 9){
+                        Console.WriteLine("That's not a valid spot. Please try again");
+                        displayGrid();
+                        continue;
+                    }
+                    if (chosenPosition < 1){
+                        Console.WriteLine("That's not a valid spot. Please try again");
+                        displayGrid();
+                        continue;
+                    }
                 }
-
                 // Yay player 2
-
                 if (turn == 2 && gameState.Equals("running"))
                 {
                     Console.WriteLine("Player 2. Which box would you like to go?");
@@ -228,6 +249,7 @@ namespace tictactoe
                             topLeft.value = 2;
                             topLeft.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -245,6 +267,7 @@ namespace tictactoe
                             topMiddle.value = 2;
                             topMiddle.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -262,6 +285,7 @@ namespace tictactoe
                             topRight.value = 2;
                             topRight.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -279,6 +303,7 @@ namespace tictactoe
                             middleLeft.value = 2;
                             middleLeft.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -296,6 +321,7 @@ namespace tictactoe
                             middleMiddle.value = 2;
                             middleMiddle.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -313,6 +339,7 @@ namespace tictactoe
                             middleRight.value = 2;
                             middleRight.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -330,6 +357,7 @@ namespace tictactoe
                             bottomLeft.value = 2;
                             bottomLeft.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -347,6 +375,7 @@ namespace tictactoe
                             bottomMiddle.value = 2;
                             bottomMiddle.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -364,6 +393,7 @@ namespace tictactoe
                             bottomRight.value = 2;
                             bottomRight.occupied = true;
                             turn = 1;
+                            turnCounter++;
                             displayGrid();
                             continue;
                         }
@@ -374,10 +404,18 @@ namespace tictactoe
                             continue;
                         }
                     }
+                    if (chosenPosition > 9){
+                        Console.WriteLine("That's not a valid spot. Please try again");
+                        displayGrid();
+                        continue;
+                    }
+                    if (chosenPosition < 1){
+                        Console.WriteLine("That's not a valid spot. Please try again");
+                        displayGrid();
+                        continue;
+                    }
                 }
-
                 // If statements are done!
-
                 // Check if player 1 won
                 void checkVictoryP1(){
                     if (topLeft.value == 1 && topRight.value == 1 && topMiddle.value == 1){
@@ -434,7 +472,6 @@ namespace tictactoe
                         gameState = "p2";
                     }
                 }
-
                 void displayGrid()
                 {
                     topLeft.convertLetter();
@@ -456,8 +493,8 @@ namespace tictactoe
                     Console.WriteLine("----------");
                     Console.WriteLine();
                 }
-
             }
+            
             while (gameState.Equals("p1"))
             {
                 Console.WriteLine("Player 1 wins!");
@@ -466,6 +503,11 @@ namespace tictactoe
             while (gameState.Equals("p2"))
             {
                 Console.WriteLine("Player 2 wins!");
+                gameState = ("");
+            }
+            while (gameState.Equals("tie"))
+            {
+                Console.WriteLine("It's a tie!");
                 gameState = ("");
             }
             Console.WriteLine("Press any key to close...");
