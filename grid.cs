@@ -31,7 +31,7 @@ namespace tictactoe
         {
             if (value == 0)
             {
-                letter = "0";
+                letter = " ";
 
             }
             if (value == 1)
